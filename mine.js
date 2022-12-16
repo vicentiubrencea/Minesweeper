@@ -2,7 +2,10 @@ let gameOver = 0;
 let flags = 10;
 let safeCells = 0;
 let nullCellsArray = [];
+let seconds = 0;
+const interval = setInterval(myTimer, 1000);
 let gameMatrix = [];
+
 for (let i = 0; i < 9; ++i) {
     let column = [];
     for (let j = 0; j < 9; ++j) {
@@ -12,14 +15,16 @@ for (let i = 0; i < 9; ++i) {
 }
 
 startGame();
-document.getElementById("boardGame").appendChild(createBoard());
-document.getElementById("time").innerHTML = "TIME: 000";
-const interval = setInterval(myTimer, 1000);
 
 function startGame() {
     bombsGenerator();
     cellHintsGenerator();
-    updateFlags();    
+    updateFlags();
+    document.getElementById("boardGame").appendChild(createBoard());
+    document.getElementById("time").innerHTML = "TIME: 000";
+    window.addEventListener('contextmenu', (e) => {
+        event.preventDefault();
+    });
 }
 
 function bombsGenerator() {
@@ -165,8 +170,6 @@ function showBombs() {
     }
 }
 
-let seconds = 0;
-
 function myTimer() {
     let aditional = "00";
     if (seconds > 9 && seconds < 100) {
@@ -177,11 +180,3 @@ function myTimer() {
     document.getElementById("time").innerHTML = "TIME: " + aditional + seconds;
     ++seconds;
 }
-
-function resetGame() {
-    window.location.reload();
-}
-
-window.addEventListener('contextmenu', (e) => {
-    event.preventDefault();
-});
