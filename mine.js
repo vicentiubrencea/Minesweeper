@@ -6,17 +6,16 @@ let seconds = 0;
 const interval = setInterval(myTimer, 1000);
 let gameMatrix = [];
 
-for (let i = 0; i < 9; ++i) {
-    let column = [];
-    for (let j = 0; j < 9; ++j) {
-        column.push(0);
-    }
-    gameMatrix.push(column);
-}
-
 startGame();
 
 function startGame() {
+    for (let i = 0; i < 9; ++i) {
+        let column = [];
+        for (let j = 0; j < 9; ++j) {
+            column.push(0);
+        }
+        gameMatrix.push(column);
+    }
     bombsGenerator();
     cellHintsGenerator();
     updateFlags();
